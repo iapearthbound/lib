@@ -169,7 +169,7 @@ if [[ $LINUXSOURCE == "linux-sunxi" ]] ; then
 fi
 
 # sunxi 3.4 dev
-if [[ $LINUXSOURCE == "linux-sunxi-dev" ]] ; then
+if [[ $LINUXSOURCE == "linux-sunxi" ]] ; then
 
 	# remove files to patch clearly
 	rm -f drivers/hwmon/a20-tp.c
