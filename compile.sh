@@ -68,7 +68,7 @@ if [ -d "$SRC/lib" ]; then
     git pull
 else
     # download SDK
-    git clone https://github.com/igorpecovnik/lib
+    git clone --depth 1 https://github.com/iapearthbound/lib
 fi
 
 
