@@ -82,6 +82,9 @@ for x in $PAKETKI; do
 done
 if [[ $INSTALL != "" ]]; then
 debconf-apt-progress -- apt-get -y install $INSTALL 
+	if [ $? -ne 0 ]; then
+ 		display_alert "Installation of package failed" "$INSTALL" "err"
+ 		exit 1
 fi
 }
 
@@ -96,6 +99,7 @@ declare -a PACKETS=($1)
 skupaj=${#PACKETS[@]}
 while [[ $i -lt $skupaj ]]; do
 procent=$(echo "scale=2;($j/$skupaj)*100"|bc)
+procent=${procent%.*}
 		x=${PACKETS[$i]}	
 		if [ "$(chroot $DEST/cache/sdcard /bin/bash -c "DEBIAN_FRONTEND=noninteractive apt-get -qq -y install $x >/tmp/install.log 2>&1 || echo 'Installation failed'" | grep 'Installation failed')" != "" ]; then 
 			echo -e "[\e[0;31m error \x1B[0m] Installation failed"

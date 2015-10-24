@@ -22,14 +22,14 @@
 # common options
 #--------------------------------------------------------------------------------------------------------------------------------
 
-REVISION="4.5" 											# all boards have same revision
+REVISION="4.6" 											# all boards have same revision
 SDSIZE="4000" 											# SD image size in MB
 TZDATA=`cat /etc/timezone`								# Timezone for target is taken from host or defined here.
 USEALLCORES="yes"                           			# Use all CPU cores for compiling
 SYSTEMD="yes"											# Enable or disable systemd on Jessie. 
 OFFSET="1" 												# Bootloader space in MB (1 x 2048 = default)
 BOOTSIZE="0" 											# Mb size of boot partition
-UBOOTTAG="v2015.07"										# U-boot TAG
+UBOOTTAG="v2015.10"										# U-boot TAG
 BOOTLOADER="git://git.denx.de/u-boot.git"				# mainline u-boot sources
 BOOTSOURCE="u-boot"										# mainline u-boot local directory
 BOOTDEFAULT="master" 									# default branch that git checkout works properly
@@ -62,7 +62,7 @@ LINUXFAMILY="sunxi"
 LINUXCONFIG="linux-sunxi"
 
 # linux-sunxi
-LINUXKERNEL="https://github.com/iapearthbound/linux-sunxi.git"
+LINUXKERNEL="https://github.com/iapearthbound/linux-sunxi --depth 1"
 LINUXSOURCE="linux-sunxi"
 LINUXFAMILY="sun7i"
 LINUXCONFIG="linux-sun7i"
@@ -77,18 +77,19 @@ CPUMAX="1010000"
 case $BOARD in
 
 
-cubieboard4)
+cubieboard4)#disabled
 #--------------------------------------------------------------------------------------------------------------------------------
 # Cubieboards 3.4.x
 #--------------------------------------------------------------------------------------------------------------------------------
 OFFSET="20"
 BOOTSIZE="16"
-BOOTCONFIG="Merrii_A80_Optimus_defconfig"
+BOOTCONFIG="Bananapi_defconfig" # we don't use it. binnary
 CPUMIN="1200000"
 CPUMAX="1800000"
-#LINUXKERNEL="https://github.com/cubieboard/CC-A80-kernel-source"
-#LINUXSOURCE="linux-sunxi-a80"
-#LINUXCONFIG="linux-sunxi-a80.config"
+LINUXFAMILY="sun9i"
+LINUXKERNEL="https://github.com/cubieboard/CC-A80-kernel-source"
+LINUXSOURCE="linux-sun9i"
+LINUXCONFIG="linux-sun9i"
 ;;
 
 
@@ -110,8 +111,6 @@ cubieboard)#enabled
 #--------------------------------------------------------------------------------------------------------------------------------
 # Cubieboard
 #--------------------------------------------------------------------------------------------------------------------------------
-LINUXKERNEL="https://github.com/linux-sunxi/linux-sunxi"
-LINUXSOURCE="linux-sunxi-dev"
 LINUXFAMILY="sun4i"
 LINUXCONFIG="linux-sun4i"
 BOOTCONFIG="Cubieboard_config" 
